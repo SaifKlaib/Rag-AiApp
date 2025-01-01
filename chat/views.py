@@ -103,6 +103,18 @@ def email_response_view(request):
     return render(request,context=context,template_name='customer_response.html')
 
 
+def summarize_text(customer_language, input_text):
+    # Template for generating a summary.
+    template_string = """Summarize the following text into a language that is {language}: 
+                         ```{text}```"""
+
+    # Create a prompt template.
+    prompt_template = ChatPromptTemplate.from_template(template_string)
+    customer_messages = prompt_template.format_messages(
+        language=customer_language,
+        text=input_text
+    )
+
 #Output Parsers
 def customer_review_view(request):
 
