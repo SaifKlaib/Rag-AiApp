@@ -116,6 +116,25 @@ def summarize_text(customer_language, input_text):
     )
 
 #Output Parsers
+def text_summary_view(request):
+    # Set a default language (can be dynamic based on the user).
+    customer_language = "English"
+    if request.method == 'POST':
+        text_to_summarize = request.POST.get('text', '')
+    else:
+        # Provide a default example text for testing.
+        text_to_summarize = """Artificial Intelligence is transforming industries by enabling automation, 
+        improving decision-making, and creating new possibilities for innovation. 
+        Companies across sectors are leveraging AI to enhance efficiency and create value."""
+
+    # Process the text to generate a summary.
+    summarized_text = summarize_text(customer_language, text_to_summarize)
+
+    # Create the context to pass to the template.
+    context = {
+        'summary': summarized_text.replace("```", ''),
+        'original_text': text_to_summarize,
+    }
 def customer_review_view(request):
 
     if request.method == 'POST':
