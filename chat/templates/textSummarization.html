@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarization</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Text Summarizer</a>
+    <!-- Button for mobile devices -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Text Summarization</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2>Text Summarization</h2>
+    <form action="{% url 'summarize' %}" method="post">
+        {% csrf_token %}
+
+        <!-- Input Text -->
+        <div class="mb-3">
+            <label for="inputText" class="form-label">Enter Text</label>
+            <textarea id="inputText" class="form-control" name="inputText" rows="10" placeholder="Enter the text you want to summarize here..." required>{{ inputText }}</textarea>
+        </div>
+
+        <!-- Output Text -->
+        <div class="mb-3">
+            <label for="outputText" class="form-label">Summarized Text</label>
+            <textarea class="form-control" id="outputText" rows="10" readonly>{{ summarizedText }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Summarize</button>
+    </form>
+</div>
+
+</body>
+</html>
